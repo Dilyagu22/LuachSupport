@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luach Or — Support</title>
+<style>
+  /* THE APP'S OWN HAVDALAH SKY, as a page.
+     Self-contained on purpose: no fonts, scripts or images are fetched, which
+     is the same promise this page makes about the app. The stars and the sky
+     are CSS gradients, not assets.
+
+     The stops are Sky.gradient's, copied from the app: night at the top
+     through to the gold horizon at the foot. That gold is why every block of
+     text sits on a translucent DARK card — cream on the bare lower sky would
+     be unreadable, which is the same reason the app gives its cards an
+     opacity on this theme and no other. */
+  :root {
+    --sky0: #0E1630;  --sky1: #16233F;  --sky2: #4A3A57;
+    --sky3: #B4763F;  --sky4: #E0A961;
+    --cream: #F5EFE3; --gold: #E8B563;
+    --ink:  #F5EFE3;  --ink2: #C9D0DE;  --ink3: #98A2B6;
+    --card: rgba(14, 22, 48, .90);
+    --line: rgba(232, 181, 99, .22);
+    /* The heading grade: nine steps walking the same sky the background does,
+       cool starlight at the top to gold at the horizon. */
+    --g1:#A9C4E8; --g2:#B6BEE2; --g3:#C3B8DA; --g4:#D0B2CE; --g5:#DDB0B4;
+    --g6:#E6B48F; --g7:#E8B563; --g8:#EFC77E; --g9:#F3D79B;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 2.5rem 1.25rem 4rem;
+    color: var(--ink2);
+    font: 17px/1.7 ui-serif, Georgia, "Times New Roman", serif;
+    -webkit-text-size-adjust: 100%;
+    background:
+      radial-gradient(1.4px 1.4px at 12% 6%,  rgba(255,255,255,.55), transparent),
+      radial-gradient(1.6px 1.6px at 78% 4%,  rgba(255,255,255,.45), transparent),
+      radial-gradient(1.2px 1.2px at 34% 11%, rgba(255,255,255,.40), transparent),
+      radial-gradient(1.5px 1.5px at 62% 14%, rgba(255,255,255,.35), transparent),
+      radial-gradient(1.3px 1.3px at 88% 18%, rgba(255,255,255,.30), transparent),
+      radial-gradient(1.2px 1.2px at 22% 21%, rgba(255,255,255,.28), transparent),
+      linear-gradient(180deg,
+        var(--sky0) 0%, var(--sky1) 30%, var(--sky2) 62%,
+        var(--sky3) 84%, var(--sky4) 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+  main { max-width: 44rem; margin: 0 auto; }
+
+  header { text-align: center; margin-bottom: 2rem; }
+  h1 {
+    color: var(--cream); font-size: 2.4rem; margin: 0 0 .5rem;
+    letter-spacing: -.01em; font-weight: 700;
+    text-shadow: 0 2px 24px rgba(0,0,0,.45);
+  }
+  .sub { color: var(--gold); font-size: .95rem; letter-spacing: .02em; }
+
+  /* Findability: every section is reachable from the top in one tap. */
+  nav {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 16px; padding: 1.1rem 1.3rem; margin-bottom: 2rem;
+    box-shadow: 0 10px 34px rgba(0,0,0,.35);
+  }
+  nav p {
+    margin: 0 0 .7rem; color: var(--gold);
+    font-size: .78rem; letter-spacing: .12em; text-transform: uppercase;
+    font-family: system-ui, -apple-system, sans-serif; font-weight: 600;
+  }
+  nav ol { margin: 0; padding: 0; list-style: none;
+           display: grid; gap: .35rem .9rem; grid-template-columns: 1fr; }
+  @media (min-width: 34rem) { nav ol { grid-template-columns: 1fr 1fr; } }
+  nav a {
+    color: var(--ink); text-decoration: none; font-size: .95rem;
+    display: block; padding: .2rem 0; border-bottom: 1px solid transparent;
+  }
+  nav a:hover { color: var(--gold); border-bottom-color: var(--line); }
+
+  section {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 16px; padding: 1.4rem 1.5rem; margin-bottom: 1.1rem;
+    box-shadow: 0 10px 34px rgba(0,0,0,.32);
+    scroll-margin-top: 1rem;
+  }
+  section h2 {
+    font-size: 1.3rem; margin: 0 0 .8rem; letter-spacing: -.005em;
+    font-weight: 700;
+  }
+  section:nth-of-type(1) h2 { color: var(--g1); }
+  section:nth-of-type(2) h2 { color: var(--g2); }
+  section:nth-of-type(3) h2 { color: var(--g3); }
+  section:nth-of-type(4) h2 { color: var(--g4); }
+  section:nth-of-type(5) h2 { color: var(--g5); }
+  section:nth-of-type(6) h2 { color: var(--g6); }
+  section:nth-of-type(7) h2 { color: var(--g7); }
+  section:nth-of-type(8) h2 { color: var(--g8); }
+  section:nth-of-type(9) h2 { color: var(--g9); }
+  section:nth-of-type(n+10) h2 { color: var(--g9); }
+
+  h3 {
+    color: var(--cream); font-size: 1rem; font-weight: 600;
+    margin: 1.5rem 0 .5rem; font-family: system-ui, -apple-system, sans-serif;
+    letter-spacing: .01em;
+  }
+  h3:first-of-type { margin-top: 1rem; }
+  p { margin: 0 0 1rem; }
+  p:last-child { margin-bottom: 0; }
+  ul { margin: 0 0 1rem; padding-left: 1.15rem; }
+  li { margin-bottom: .5rem; }
+  li::marker { color: var(--gold); }
+  strong { color: var(--cream); font-weight: 600; }
+  a { color: var(--gold); }
+
+  .lede {
+    background: linear-gradient(180deg, rgba(232,181,99,.10), rgba(232,181,99,.03));
+    border: 1px solid rgba(232,181,99,.34);
+    border-radius: 16px; padding: 1.3rem 1.45rem; margin-bottom: 1.6rem;
+    color: var(--ink); box-shadow: 0 10px 34px rgba(0,0,0,.30);
+  }
+  .lede p:last-child { margin-bottom: 0; }
+
+  /* The footer needs its own plate for the same reason the sections do: it
+     lands on the GOLD end of the sky, where grey ink measured unreadable.
+     This is the app's own skyPlate rule — text on the page, not on a card,
+     has to bring its own ground. */
+  footer {
+    margin-top: 1.6rem; padding: 1.1rem 1.3rem;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 16px;
+    color: var(--ink2); font-size: .9rem; text-align: center;
+    box-shadow: 0 10px 34px rgba(0,0,0,.32);
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<main>
+<header>
+    <h1>Support</h1>
+    <div class="sub">Luach Or &middot; last updated 3 September 2026</div>
+  </header>
+
+<div class="lede">
+    <p><strong>Email <a href="mailto:biz-push.1j@icloud.com">biz-push.1j@icloud.com</a></strong>
+    and you will get a reply. Please say which iPhone you have, which language
+    the app is in, and which city you have chosen &mdash; almost every question
+    about a time depends on those three.</p>
+  </div>
+
+  <nav aria-label="On this page">
+    <p>On this page</p>
+    <ol>
+      <li><a href="#a-time-in-the-app-differs-from-the-one-my-shul-uses">A time in the app differs from the one my shul uses</a></li>
+      <li><a href="#how-do-i-change-my-city">How do I change my city?</a></li>
+      <li><a href="#why-do-the-holiday-dates-not-match-another-calendar">Why do the holiday dates not match another calendar?</a></li>
+      <li><a href="#my-reminders-are-not-arriving">My reminders are not arriving</a></li>
+      <li><a href="#where-is-my-data-and-can-i-move-it-to-a-new-phone">Where is my data, and can I move it to a new phone?</a></li>
+      <li><a href="#which-texts-does-the-app-follow">Which texts does the app follow?</a></li>
+      <li><a href="#i-found-a-mistake-in-a-text">I found a mistake in a text</a></li>
+      <li><a href="#reporting-a-problem">Reporting a problem</a></li>
+      <li><a href="#privacy">Privacy</a></li>
+    </ol>
+  </nav>
+
+  <section id="a-time-in-the-app-differs-from-the-one-my-shul-uses">
+<h2>A time in the app differs from the one my shul uses</h2>
+  <p>Candle lighting is calculated for the city you chose, using that city&rsquo;s own
+  custom where it has one &mdash; forty minutes before sunset in Jerusalem, thirty in
+  Haifa and Tzfat, twenty-two in Tel Aviv and Bnei Brak, twenty in Beer Sheva,
+  Chicago and S&atilde;o Paulo, and eighteen everywhere else. A
+  community a few miles away can hold a different custom, and some shuls publish
+  a fixed time all year. If your shul&rsquo;s time differs consistently, follow your
+  shul.</p>
+  </section>
+
+  <section id="how-do-i-change-my-city">
+<h2>How do I change my city?</h2>
+  <p>Settings &rarr; City. There are fifty-four cities. &ldquo;Use my current location&rdquo;
+  sets it from where you are, and the app asks for location permission only when
+  you tap it &mdash; it never asks on its own.</p>
+  </section>
+
+  <section id="why-do-the-holiday-dates-not-match-another-calendar">
+<h2>Why do the holiday dates not match another calendar?</h2>
+  <p>Settings &rarr; Rite. Outside Israel, a second day of Yom Tov is kept, which
+  changes both the dates and which days work is prohibited. Switching that
+  setting moves everything at once.</p>
+  </section>
+
+  <section id="my-reminders-are-not-arriving">
+<h2>My reminders are not arriving</h2>
+  <p>Settings &rarr; Notifications shows whether iOS has been asked, and whether it
+  said yes. If iOS has refused, the app cannot ask again &mdash; open the iOS
+  Settings app, find Luach Or, and turn Notifications on there. Reminders fire in
+  the clock of the city you have chosen, not the phone&rsquo;s.</p>
+  </section>
+
+  <section id="where-is-my-data-and-can-i-move-it-to-a-new-phone">
+<h2>Where is my data, and can I move it to a new phone?</h2>
+  <p>On your phone, and nowhere else. Settings &rarr; Save a copy of my data writes
+  a file with your personal dates, your loved ones and their Hebrew names, your
+  notes, collections, favorites and reading marks. Add it on the other device
+  with Add data from a file. Adding a file only ever adds &mdash; nothing already
+  there is changed or removed.</p>
+  </section>
+
+  <section id="which-texts-does-the-app-follow">
+<h2>Which texts does the app follow?</h2>
+  <p>Chabad practice. Texts are checked against published editions before they
+  ship, and scripture, translations and holiday notes are credited to their
+  sources inside the app &mdash; Settings &rarr; About.</p>
+  </section>
+
+  <section id="i-found-a-mistake-in-a-text">
+<h2>I found a mistake in a text</h2>
+  <p>Please write. Say which entry, which line, and what it should say. Errors in
+  a prayer matter more than anything else in the app and are fixed first.</p>
+  </section>
+
+  <section id="reporting-a-problem">
+<h2>Reporting a problem</h2>
+  <p>Useful things to include: what you did, what you expected, and what
+  happened instead; the date and city involved if it concerns a time; and a
+  screenshot if you have one.</p>
+  </section>
+
+  <section id="privacy">
+<h2>Privacy</h2>
+  <p>The app collects nothing. The full policy is at
+  <a href="https://dilyagu22.github.io/LuachPrivacy/">dilyagu22.github.io/LuachPrivacy</a>.</p>
+  </section>
+
+<footer>
+    Luach Or &mdash; a Jewish calendar, zmanim and blessings reference.
+    This page is served as a static file and sets no cookies.
+  </footer>
+</main>
+</body>
+</html>
